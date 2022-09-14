@@ -18,18 +18,18 @@ class SignInScreen extends StatelessWidget {
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(45)),
                 color: Colors.white),
-            child: Column(children: const [
+            child: Column(children: [
               // Input Email
               CustomTextField(
                 icon: Icons.email,
                 label: 'Email',
-                isObscure: false,
+                isSecret: false,
               ),
               // Input Senha
               CustomTextField(
                 icon: Icons.lock,
                 label: 'Senha',
-                isObscure: true,
+                isSecret: true,
               )
             ]),
           ),
