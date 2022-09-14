@@ -13,9 +13,21 @@ class SignInScreen extends StatelessWidget {
         Expanded(child: Container(color: Colors.greenAccent)),
         Expanded(
           child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(45)),
                 color: Colors.white),
+            child: Column(children: [
+              // Input Email
+              TextFormField(
+                decoration: InputDecoration(
+                    isDense: true,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18))),
+              ),
+              // Input Senha
+              TextFormField()
+            ]),
           ),
         )
       ]),
