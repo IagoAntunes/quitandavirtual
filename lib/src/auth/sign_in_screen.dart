@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:quitandavirtual/src/auth/components/custom_text_field.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -17,16 +18,19 @@ class SignInScreen extends StatelessWidget {
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(45)),
                 color: Colors.white),
-            child: Column(children: [
+            child: Column(children: const [
               // Input Email
-              TextFormField(
-                decoration: InputDecoration(
-                    isDense: true,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18))),
+              CustomTextField(
+                icon: Icons.email,
+                label: 'Email',
+                isObscure: false,
               ),
               // Input Senha
-              TextFormField()
+              CustomTextField(
+                icon: Icons.lock,
+                label: 'Senha',
+                isObscure: true,
+              )
             ]),
           ),
         )
