@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -11,7 +12,41 @@ class SignInScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.greenAccent,
       body: Column(children: [
-        Expanded(child: Container(color: Colors.greenAccent)),
+        //Banner
+        Expanded(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //Titulo
+            Text.rich(TextSpan(style: TextStyle(fontSize: 40), children: [
+              TextSpan(
+                  text: 'Green',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+              TextSpan(text: 'grocer', style: TextStyle(color: Colors.red)),
+            ])),
+
+            //Categorias
+            SizedBox(
+              height: 30,
+              child: DefaultTextStyle(
+                style: const TextStyle(fontSize: 25),
+                child: AnimatedTextKit(
+                    pause: Duration.zero,
+                    repeatForever: true,
+                    animatedTexts: [
+                      FadeAnimatedText('Frutas'),
+                      FadeAnimatedText('Verduras'),
+                      FadeAnimatedText('Legumes'),
+                      FadeAnimatedText('Carnes'),
+                      FadeAnimatedText('Cereais')
+                    ]),
+              ),
+            )
+          ],
+        )),
+
+        //Form
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
           decoration: const BoxDecoration(
@@ -25,12 +60,14 @@ class SignInScreen extends StatelessWidget {
               label: 'Email',
               isSecret: false,
             ),
+
             // Input Password
             const CustomTextField(
               icon: Icons.lock,
               label: 'Senha',
               isSecret: true,
             ),
+
             //Login Button
             SizedBox(
                 height: 50,
@@ -44,6 +81,7 @@ class SignInScreen extends StatelessWidget {
                       'Entrar',
                       style: TextStyle(fontSize: 18),
                     ))),
+
             //Forget Password
             const Align(
               alignment: Alignment.centerRight,
@@ -54,6 +92,7 @@ class SignInScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.red),
                   )),
             ),
+
             //Divider OR
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
@@ -78,6 +117,7 @@ class SignInScreen extends StatelessWidget {
                 ],
               ),
             ),
+
             // Button Sign In
             SizedBox(
               height: 50,
