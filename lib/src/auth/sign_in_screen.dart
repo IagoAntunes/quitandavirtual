@@ -18,20 +18,43 @@ class SignInScreen extends StatelessWidget {
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(45)),
                 color: Colors.white),
-            child: Column(children: [
-              // Input Email
-              CustomTextField(
-                icon: Icons.email,
-                label: 'Email',
-                isSecret: false,
-              ),
-              // Input Senha
-              CustomTextField(
-                icon: Icons.lock,
-                label: 'Senha',
-                isSecret: true,
-              )
-            ]),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Input Email
+                  const CustomTextField(
+                    icon: Icons.email,
+                    label: 'Email',
+                    isSecret: false,
+                  ),
+                  // Input Senha
+                  const CustomTextField(
+                    icon: Icons.lock,
+                    label: 'Senha',
+                    isSecret: true,
+                  ),
+                  SizedBox(
+                      height: 50,
+                      width: 120,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18))),
+                          onPressed: null,
+                          child: const Text(
+                            'Entrar',
+                            style: TextStyle(fontSize: 18),
+                          ))),
+                  const Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                        onPressed: null,
+                        child: Text(
+                          'Esqueceu a Senha?',
+                          style: TextStyle(color: Colors.red),
+                        )),
+                  )
+                ]),
           ),
         )
       ]),
