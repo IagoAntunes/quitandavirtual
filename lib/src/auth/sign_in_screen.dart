@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:quitandavirtual/src/auth/components/custom_text_field.dart';
+import 'package:quitandavirtual/src/auth/config/custom_colors.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -10,7 +11,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.greenAccent,
+      backgroundColor: CustomColors.customSwatchColor,
       body: Column(children: [
         //Banner
         Expanded(
@@ -23,7 +24,9 @@ class SignInScreen extends StatelessWidget {
                   text: 'Green',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold)),
-              TextSpan(text: 'grocer', style: TextStyle(color: Colors.red)),
+              TextSpan(
+                  text: 'grocer',
+                  style: TextStyle(color: CustomColors.customContrastColor)),
             ])),
 
             //Categorias
@@ -83,13 +86,13 @@ class SignInScreen extends StatelessWidget {
                     ))),
 
             //Forget Password
-            const Align(
+            Align(
               alignment: Alignment.centerRight,
               child: TextButton(
                   onPressed: null,
                   child: Text(
                     'Esqueceu a Senha?',
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: CustomColors.customContrastColor),
                   )),
             ),
 
