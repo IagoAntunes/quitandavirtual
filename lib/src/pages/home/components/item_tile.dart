@@ -3,6 +3,8 @@ import 'package:quitandavirtual/src/config/custom_colors.dart';
 import 'package:quitandavirtual/src/models/item_model.dart';
 import 'package:quitandavirtual/src/services/utils_services.dart';
 
+import '../../product/product_screen.dart';
+
 class ItemTile extends StatelessWidget {
   ItemTile({
     super.key,
@@ -16,47 +18,58 @@ class ItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Card(
-          elevation: 1,
-          shadowColor: Colors.grey.shade300,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  //Imagem
-                  Expanded(child: Image.asset(item.imgUrl)),
-                  //Nome
-                  Text(
-                    item.itemName,
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  //Preço - unidade
-                  Row(
-                    children: [
-                      Text(
-                        utilsServices.priceTocurrency(item.price),
-                        style: TextStyle(
-                          color: CustomColors.customSwatchColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      Text(
-                        '/${item.unit}',
-                        style: TextStyle(
-                            color: Colors.grey.shade500,
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (c) {
+              return ProductScreen(
+                item: item,
+              );
+            }));
+          },
+          child: Card(
+            elevation: 1,
+            shadowColor: Colors.grey.shade300,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //Imagem
+                    Expanded(child: Image.asset(item.imgUrl)),
+                    //Nome
+                    Text(
+                      item.itemName,
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    //Preço - unidade
+                    Row(
+                      children: [
+                        Text(
+                          utilsServices.priceTocurrency(item.price),
+                          style: TextStyle(
+                            color: CustomColors.customSwatchColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ]),
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          '/${item.unit}',
+                          style: TextStyle(
+                              color: Colors.grey.shade500,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12),
+                        ),
+                      ],
+                    ),
+                  ]),
+            ),
           ),
         ),
+
+        //Carrinho
         Positioned(
             top: 4,
             right: 4,
