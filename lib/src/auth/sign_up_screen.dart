@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:quitandavirtual/src/auth/components/custom_text_field.dart';
 import 'package:quitandavirtual/src/auth/config/custom_colors.dart';
