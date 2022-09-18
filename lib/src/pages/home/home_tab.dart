@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:quitandavirtual/src/config/custom_colors.dart';
 import 'package:quitandavirtual/src/config/app_data.dart' as appData;
+import 'package:quitandavirtual/src/pages/home/components/item_tile.dart';
 import 'components/category_tile.dart';
 
 class HomeTab extends StatefulWidget {
@@ -109,8 +110,8 @@ class _HomeTabState extends State<HomeTab> {
                   childAspectRatio: 9 / 11.5),
               itemCount: appData.items.length,
               itemBuilder: (_, index) {
-                return Container(
-                  color: Colors.yellow,
+                return ItemTile(
+                  item: appData.items[index],
                 );
               }),
         ),
