@@ -4,11 +4,19 @@ import 'package:quitandavirtual/src/models/item_model.dart';
 import 'package:quitandavirtual/src/pages/common_widgets/quantity_widgets.dart';
 import 'package:quitandavirtual/src/services/utils_services.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
   ProductScreen({super.key, required this.item});
 
   final ItemModel item;
+
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
   final UtilsServices utilsServices = UtilsServices();
+
+  int cardItemQuantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +28,9 @@ class ProductScreen extends StatelessWidget {
           Column(children: [
             //Imagem
             Expanded(
-                child: Hero(tag: item.imgUrl, child: Image.asset(item.imgUrl))),
+                child: Hero(
+                    tag: widget.item.imgUrl,
+                    child: Image.asset(widget.item.imgUrl))),
             Expanded(
                 child: Container(
               padding: const EdgeInsets.all(32),
@@ -42,19 +52,27 @@ class ProductScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            item.itemName,
+                            widget.item.itemName,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                                 fontSize: 27, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        QuantityWidget()
+                        QuantityWidget(
+                          suffixText: widget.item.unit,
+                          value: cardItemQuantity,
+                          result: (quantity) {
+                            setState(() {
+                              cardItemQuantity = quantity;
+                            });
+                          },
+                        )
                       ],
                     ),
                     //Price
                     Text(
-                      utilsServices.priceTocurrency(item.price),
+                      utilsServices.priceTocurrency(widget.item.price),
                       style: TextStyle(
                           fontSize: 23,
                           fontWeight: FontWeight.bold,
@@ -67,7 +85,7 @@ class ProductScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: SingleChildScrollView(
                             child: Text(
-                          item.description,
+                          widget.item.description,
                           style: const TextStyle(height: 1.5),
                         )),
                       ),
