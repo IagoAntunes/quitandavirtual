@@ -26,7 +26,7 @@ class QuantityWidget extends StatelessWidget {
               blurRadius: 2,
             )
           ]),
-      child: Row(children: [
+      child: Row(mainAxisSize: MainAxisSize.min, children: [
         _QuantityButton(
           icon: Icons.remove,
           color: Colors.grey,
