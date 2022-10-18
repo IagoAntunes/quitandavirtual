@@ -4,10 +4,31 @@ import 'package:quitandavirtual/src/pages/cart/components/cart_tile.dart';
 import 'package:quitandavirtual/src/services/utils_services.dart';
 import 'package:quitandavirtual/src/config/app_data.dart' as appData;
 
-class CartTab extends StatelessWidget {
-  CartTab({super.key});
+import '../../models/cart_item_model.dart';
 
+class CartTab extends StatefulWidget {
+  const CartTab({super.key});
+
+  @override
+  State<CartTab> createState() => _CartTabState();
+}
+
+class _CartTabState extends State<CartTab> {
   final UtilsServices utilsServices = UtilsServices();
+
+  void removeItemFromCart(CartItemModel cardItem) {
+    setState(() {
+      appData.cartItems.remove(cardItem);
+    });
+  }
+
+  double cartTotalPrice() {
+    double total = 0;
+    for (var item in appData.cartItems) {
+      total += item.totalPrice();
+    }
+    return total;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +39,8 @@ class CartTab extends StatelessWidget {
             child: ListView.builder(
           itemCount: appData.cartItems.length,
           itemBuilder: (_, index) {
-            return CartTile(cartItem: appData.cartItems[index]);
+            return CartTile(
+                cartItem: appData.cartItems[index], remove: removeItemFromCart);
           },
         )),
         Container(
@@ -38,7 +60,7 @@ class CartTab extends StatelessWidget {
               style: TextStyle(fontSize: 12),
             ),
             Text(
-              utilsServices.priceTocurrency(50.5),
+              utilsServices.priceTocurrency(cartTotalPrice()),
               style: TextStyle(
                   fontSize: 23,
                   color: CustomColors.customSwatchColor,

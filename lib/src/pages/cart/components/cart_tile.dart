@@ -5,10 +5,20 @@ import 'package:quitandavirtual/src/services/utils_services.dart';
 import '../../../config/custom_colors.dart';
 import '../../../models/cart_item_model.dart';
 
-class CartTile extends StatelessWidget {
-  CartTile({super.key, required this.cartItem});
-
+class CartTile extends StatefulWidget {
+  const CartTile({
+    super.key,
+    required this.cartItem,
+    required this.remove,
+  });
+  final Function(CartItemModel) remove;
   final CartItemModel cartItem;
+
+  @override
+  State<CartTile> createState() => _CartTileState();
+}
+
+class _CartTileState extends State<CartTile> {
   final UtilsServices utilsServices = UtilsServices();
 
   @override
@@ -19,27 +29,37 @@ class CartTile extends StatelessWidget {
       child: ListTile(
         //Imagem
         leading: Image.asset(
-          cartItem.item.imgUrl,
+          widget.cartItem.item.imgUrl,
           height: 60,
           width: 60,
         ),
         //Titulo
         title: Text(
-          cartItem.item.itemName,
+          widget.cartItem.item.itemName,
           style: const TextStyle(fontWeight: FontWeight.w500),
         ),
         //Total
         subtitle: Text(
-          utilsServices.priceTocurrency(cartItem.totalPrice()),
+          utilsServices.priceTocurrency(widget.cartItem.totalPrice()),
           style: TextStyle(
               color: CustomColors.customSwatchColor,
               fontWeight: FontWeight.bold),
         ),
         //Quantidade
         trailing: QuantityWidget(
-            suffixText: cartItem.item.unit,
-            value: cartItem.quantity,
-            result: (quantity) {}),
+          suffixText: widget.cartItem.item.unit,
+          value: widget.cartItem.quantity,
+          result: (quantity) {
+            setState(() {
+              widget.cartItem.quantity = quantity;
+              if (quantity == 0) {
+                //Remove item do carrinho
+                widget.remove(widget.cartItem);
+              }
+            });
+          },
+          isRemovable: true,
+        ),
       ),
     );
   }
