@@ -5,6 +5,7 @@ import 'package:quitandavirtual/src/services/utils_services.dart';
 import 'package:quitandavirtual/src/config/app_data.dart' as appData;
 
 import '../../models/cart_item_model.dart';
+import '../common_widgets/payment_dialog.dart';
 
 class CartTab extends StatefulWidget {
   const CartTab({super.key});
@@ -71,6 +72,14 @@ class _CartTabState extends State<CartTab> {
               child: ElevatedButton(
                 onPressed: () async {
                   bool? result = await showOrderConfirmation();
+                  if (result ?? false) {
+                    showDialog(
+                      context: context,
+                      builder: ((context) => PaymentDialog(
+                            order: appData.orders.first,
+                          )),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: CustomColors.customSwatchColor,
@@ -102,7 +111,7 @@ class _CartTabState extends State<CartTab> {
               onPressed: (() {
                 Navigator.of(context).pop(false);
               }),
-              child: Text('Não'),
+              child: const Text('Não'),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -112,7 +121,7 @@ class _CartTabState extends State<CartTab> {
               onPressed: (() {
                 Navigator.of(context).pop(true);
               }),
-              child: Text('Sim'),
+              child: const Text('Sim'),
             )
           ],
         );

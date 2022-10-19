@@ -5,7 +5,7 @@ import 'package:quitandavirtual/src/pages/common_widgets/quantity_widgets.dart';
 import 'package:quitandavirtual/src/services/utils_services.dart';
 
 class ProductScreen extends StatefulWidget {
-  ProductScreen({super.key, required this.item});
+  const ProductScreen({super.key, required this.item});
 
   final ItemModel item;
 
